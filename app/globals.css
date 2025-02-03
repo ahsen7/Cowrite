@@ -4,16 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import "@liveblocks/react-ui/styles.css"; */
-/* @import "@liveblocks/react-lexical/styles.css"; */
+@import "@liveblocks/react-ui/styles.css";
+@import "@liveblocks/react-lexical/styles.css";
 
- @import "../styles/dark-theme.css"; 
+@import "../styles/dark-theme.css";
 
 /* ========================================== TAILWIND STYLES */
 
 body {
   font-family: "Merriweather", serif;
 }
+
 @layer base {
   :root {
     background: #09111f;
@@ -45,6 +46,7 @@ body {
   .text-28-semibold {
     @apply text-[28px] font-semibold;
   }
+
   .text-10-regular {
     @apply text-[10px] font-normal;
   }
@@ -52,8 +54,12 @@ body {
   .gradient-blue {
     @apply bg-gradient-to-t from-blue-500 to-blue-400;
   }
+
   .gradient-red {
     @apply bg-gradient-to-t from-red-500 to-red-400;
+  }
+  .gradient-orange {
+    @apply bg-gradient-to-t from-red-400 to-red-600;
   }
 
   .shad-dialog {
@@ -93,7 +99,7 @@ body {
   }
 
   .editor-wrapper {
-    @apply custom-scrollbar h-[calc(100vh-140px)] gap-5 overflow-auto px-5 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pt-10;
+    @apply custom-scrollbar h-[calc(100vh-140px)] gap-5 overflow-auto px-5 pt-5 lg:flex-row lg:items-start lg:justify-center xl:gap-10 xl:pt-10;
   }
 
   .header {
@@ -235,25 +241,17 @@ body {
   padding: 8px;
 }
 
-.lb-button:where(
-    [data-variant="default"]:not(
-        :is(
-            :enabled:hover,
-            :enabled:focus-visible,
-            [aria-expanded="true"],
-            [aria-selected="true"]
-          )
-      )
-  ) {
+.lb-button:where([data-variant="default"]:not( :is( :enabled:hover,
+      :enabled:focus-visible,
+      [aria-expanded="true"],
+      [aria-selected="true"]))) {
   color: #b4c6ee;
 }
 
-.lb-button:where(
-    :enabled:hover,
-    :enabled:focus-visible,
-    [aria-expanded="true"],
-    [aria-selected="true"]
-  ) {
+.lb-button:where( :enabled:hover,
+  :enabled:focus-visible,
+  [aria-expanded="true"],
+  [aria-selected="true"]) {
   --lb-button-background: #161e30;
 
   color: #b4c6ee;
