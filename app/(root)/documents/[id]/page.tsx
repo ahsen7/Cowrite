@@ -1,6 +1,6 @@
 
 import CollabRoom from '@/components/common/CollabRoom'
-import { getDocumentUsers } from '@/lib/actions/user.actions';
+import { getDocumentUsers } from '@/lib/actions/room.actions';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import React from 'react'
