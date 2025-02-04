@@ -11,9 +11,9 @@ import { Input } from '../ui/input'
 import Image from 'next/image'
 import { updateDocument } from '@/lib/actions/room.actions'
 
-const CollabRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => {
+const CollabRoom = ({ roomId, roomMetadata, users, currentUserType }: CollaborativeRoomProps) => {
 
-    const currentUserType = 'editor';
+
 
     const [documentTitle, setdocumentTitle] = useState(roomMetadata.title);
     const [isEditing, setisEditing] = useState(false);
@@ -121,7 +121,10 @@ const CollabRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => {
 
                     </Header>
 
-                    <Editor />
+                    <Editor
+                        roomId={roomId}
+                        currentUserType={currentUserType}
+                    />
 
                 </div>
             </ClientSideSuspense>
