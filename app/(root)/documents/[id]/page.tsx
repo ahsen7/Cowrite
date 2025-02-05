@@ -1,48 +1,49 @@
 
 import CollabRoom from '@/components/common/CollabRoom'
-import { getDocumentUsers } from '@/lib/actions/room.actions';
+import { getDocument } from '@/lib/actions/room.actions';
 import { getClerkUsers } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import React from 'react'
 
+
+
 const Document = async ({ params: { id } }: SearchParamProps) => {
     const clerkUser = await currentUser();
-    if (!clerkUser) redirect('/sign-in')
 
-    const room = await getDocumentUsers({
+    
+    if (!clerkUser) redirect('/sign-in');
+
+
+
+    const room = await getDocument({
         roomId: id,
         userId: clerkUser.emailAddresses[0].emailAddress,
-
     });
 
-    if (!room) redirect('/')
+    
+
+    if (!room) redirect('/');
 
     const userIds = Object.keys(room.usersAccesses);
+    
     const users = await getClerkUsers({ userIds });
 
-    console.log("User IDs:", userIds);
-    console.log("Fetched Users:", users);
+    console.log('UserData:', users);
 
-
-    const userData = users.map((user: User) => ({
+    const usersData = (users || []).map((user: User) => ({
         ...user,
-        userType: room.usersAccesses[user.email]?.includes('room:write')
-            ? 'editor'
-            : 'viewer',
-    }));
+        userType: room.usersAccesses[user.email]?.includes('room:write') ? 'editor' : 'viewer'
+      }));
 
-    const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.
-        includes('room:write')
-        ? 'editor'
-        : 'viewer';
+    const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
 
     return (
         <main className='flex w-full flex-col items-center'>
             <CollabRoom
                 roomId={id}
                 roomMetadata={room.metadata}
-                users={userData}
+                users={usersData}
                 currentUserType={currentUserType}
             />
         </main>
